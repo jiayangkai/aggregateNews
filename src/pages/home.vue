@@ -1,25 +1,26 @@
 <template lang="html">
-  <div>
+  <div class="container">
     <!-- header -->
-    <div>
-    </div>
+      <vheader class="p-header"></vheader>
     <!-- nav -->
     <div>
+      <span>a html</span>
     </div>
   </div>
 </template>
 <script>
-  import header from '@/components/header'
+  import vheader from '@/components/header'
   import navNews from '@/components/navNews'
   export default {
     components: {
-      header,
+      vheader,
       navNews
     }
   }
-
 </script>
 <style lang="css" scoped>
-
-
+.p-header{
+  position: fixed;
+  top: 0;
+}
 </style>

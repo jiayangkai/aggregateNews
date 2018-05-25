@@ -1,15 +1,15 @@
 <template lang="html">
-  <div>
+  <div class="header">
     <!-- profile button -->
     <div>
-      <img src="{{profileSrc}}" @Click="getProfile">
+      <img class="personalImg" :src="profileSrc" @Click="getProfile">
     </div>
     <div>
       <span>A News</span>
     </div>
     <!-- search -->
     <div>
-      <img src="{{searchSrc}}" @Click="search">
+      <img :src="searchSrc" @Click="search">
     </div>
   </div>
 </template>
@@ -17,11 +17,11 @@
   export default {
     computed: {
       profileSrc: function () {
-        var src = require("./assets/header/profile.png")
+        var src = require("../assets/header/profile.png")
         return src
       },
       searchSrc: function () {
-        var src = require("./assets/search/search.png")
+        var src = require("../assets/search/search.png")
         return src
       }
     },
@@ -38,7 +38,20 @@
   }
 
 </script>
-<style lang="css">
-
-
+<style lang="css" scoped>
+.header{
+  width: 100%;
+  height: 1.2rem;
+  font-size: 20px;
+  justify-content: space-between;
+  display: flex;
+  font-weight: 700;
+  background-color: coral;
+  color: #fff;
+}
+img{
+  width: .88rem;
+  height: .50rem;
+  padding: .5rem;
+}
 </style>

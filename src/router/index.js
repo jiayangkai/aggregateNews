@@ -1,15 +1,34 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import App from '../App'
+import {
+  routerMode
+} from '../common/env'
+import VueRouter from 'vue-router';
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+const home = r => require.ensure([], () => r(require('@/pages/home.vue')), 'home')
+const personal = r => require.ensure([], () => r(require('@/pages/personalinfo.vue')), 'personal')
+
+const router = new VueRouter({
+  mode: routerMode,
+  routes: [{
+    path: '/',
+    component: App,
+    meta: {
+      keepAlive: true
+    },
+    children: [{
+      path: '',
+      component: home,
+      meta: {
+        title: ''
+      }
+    },{
+      path:'/personal',
+      component:personal
+    }]
+  }]
 })
+
+export default router
