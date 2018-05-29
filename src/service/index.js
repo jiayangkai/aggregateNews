@@ -2,19 +2,16 @@ import fetch from '../common/fetch'
 
 // 获取分类新闻
 export const getNewsByChannel = (params) => fetch({
-  'url': '/news/get',
+  'url': 'api/news/get?' + params +'&appkey=32156feecb44b2ec',
   'method': 'post',
-  'data': params
 })
 // 获取频道
-export const getChannels = (params) => fetch({
-  'url': '/news/channel',
+export const getChannels = () => fetch({
+  'url': 'api/news/channel?appkey=32156feecb44b2ec',
   'method': 'post',
-  'data': params
 })
 // 搜索新闻
 export const searchNews = (params) => fetch({
-  'url': '/news/search',
+  'url': 'api/news/search?' + params + '&appkey=32156feecb44b2ec',
   'method': 'post',
-  'data': params
 })

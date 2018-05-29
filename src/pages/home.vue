@@ -3,21 +3,20 @@
     <!-- header -->
       <vheader class="p-header"></vheader>
     <!-- nav -->
-    <div>
-      <span>a html</span>
-    </div>
+    <vnavNews class="nav-channel"></vnavNews>
   </div>
 </template>
 <script>
   import vheader from '@/components/header'
-  import navNews from '@/components/navNews'
+  import vnavNews from '@/components/navNews'
   export default {
     components: {
       vheader,
-      navNews
+      vnavNews
     }
   }
 </script>
+
 <style lang="css" scoped>
 .p-header{
   position: fixed;

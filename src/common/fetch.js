@@ -2,7 +2,7 @@ import axios from 'axios'
 import {apiUrl} from './env.js'
 
 // axios 全局配置
-axios.defaults.timeout = 1000
+axios.defaults.timeout = 10000
 axios.defaults.headers.post['content-type'] = 'application/json;charset=UTF-8'
 axios.defaults.baseUrl = apiUrl
 // CORS跨域

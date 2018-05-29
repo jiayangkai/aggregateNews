@@ -1,16 +1,8 @@
 <template lang="html">
   <div class="header">
-    <!-- profile button -->
-    <div>
-      <img class="personalImg" :src="profileSrc" @Click="getProfile">
-    </div>
-    <div>
-      <span>A News</span>
-    </div>
-    <!-- search -->
-    <div>
-      <img :src="searchSrc" @Click="search">
-    </div>
+    <img class="personalImg" :src="profileSrc" @Click="getProfile">
+    <span>A News</span>
+    <img :src="searchSrc" @Click="search">
   </div>
 </template>
 <script>
@@ -39,19 +31,23 @@
 
 </script>
 <style lang="css" scoped>
-.header{
-  width: 100%;
-  height: 1.2rem;
-  font-size: 20px;
-  justify-content: space-between;
-  display: flex;
-  font-weight: 700;
-  background-color: coral;
-  color: #fff;
-}
-img{
-  width: .88rem;
-  height: .50rem;
-  padding: .5rem;
-}
+  .header {
+    width: 100%;
+    height: 1.2rem;
+    font-size: 20px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    background-color: coral;
+    color: #fff;
+    z-index: 99;
+  }
+
+  img {
+    width: .67rem;
+    height: .67rem;
+    padding: .4rem;
+  }
+
 </style>

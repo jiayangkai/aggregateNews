@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div id="app">
       <router-view></router-view>
       <loading v-show="fetchLoading"></loading>
   </div>
@@ -40,5 +40,10 @@
 </script>
 
 <style>
-
+html, body {
+  overflow-x: hidden;
+}
+body{
+  margin: 0;
+}
 </style>

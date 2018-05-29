@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
+    env: require('./dev.env'),
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -41,16 +41,17 @@ module.exports = {
 
     cssSourceMap: false,
     proxyTable: {
-      '/api/news':{
+      '/api':{
         target:'http://api.jisuapi.com',
         changeOrigin: true,
-        pathRewrite:{'^/api/news':''}
+        pathRewrite:{'^/api':'http://api.jisuapi.com'}
       }
     }
   },
 
   build: {
     // Template for index.html
+    env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
