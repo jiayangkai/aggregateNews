@@ -152,7 +152,7 @@
   .newsContent {
     padding-top: 0.96rem;
   }
-  loading img {
+  loading {
   margin-top: 30px;
   width: 50px;
   height: 50px;
@@ -160,18 +160,18 @@
 }
 .section {
   width: 100%;
-  height: 2.5rem;
+  height: 5rem;
   border-bottom: 1px solid #ccc;
 }
 .news {
-  height: 2.25rem;
+  height: 4.5rem;
   box-sizing: border-box;
   margin: 10px 10px;
   display: flex;
 }
 .news-left {
   height: 100%;
-  width: 2.8rem;
+  width: 4rem;
   display: inline-block;
 }
 .news-left img {

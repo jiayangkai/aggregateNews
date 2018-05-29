@@ -46,7 +46,7 @@
       },
       autoPlay() {
         this.currentIndex++
-          if (this.currentIndex === this.imgcount) {
+          if (this.currentIndex === this.channelNews.length) {
             this.currentIndex = 0
             return
           }
@@ -65,52 +65,43 @@
 </script>
 <style scoped>
   .carousel {
-    margin-bottom: 5.6rem;
+    margin-bottom: 10rem;
   }
-
   .carousel,
   ul,
   li {
     width: 100%;
     display: inline-block;
   }
-
   li {
     position: absolute;
   }
-
   li img {
     width: 100%;
-    height: 5.33rem;
+    height: 10rem;
   }
-
   .image-enter-active {
     transform: translateX(0);
     transition: all 1s ease;
   }
-
   .image-leave-active {
     transform: translateX(-100%);
     transition: all 1s ease;
   }
-
   .image-enter {
     transform: translateX(100%);
   }
-
   .image-leave {
     transform: translateX(0);
   }
-
   .bullet {
     width: 100%;
     position: absolute;
-    top: 7rem;
+    top: 10rem;
     margin: 0 auto;
     text-align: right;
     z-index: 10;
   }
-
   .bullet span {
     width: 10px;
     height: 10px;
@@ -119,11 +110,9 @@
     margin-right: 10px;
     border-radius: 10px;
   }
-
   .active {
     background-color: #fff;
   }
-
   .clearfix {
     content: '';
     clear: both;
