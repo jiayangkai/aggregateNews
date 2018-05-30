@@ -4,11 +4,12 @@ import {
   searchNews
 } from '../service/index.js'
 import {
-  GET_CHANNEL,
+  SET_CHANNEL,
   FETCH_LOADING,
-  GET_CHANNELNEWS,
+  SET_CHANNELNEWS,
   SET_CHNNELINDEX,
-  SET_CHNNELNAME
+  SET_CHNNELNAME,
+  SET_COLLECTNEWS
 } from './mutation_types.js'
 
 
@@ -20,7 +21,7 @@ export default {
   }, params) {
     let res = await getNewsByChannel(params)
     if(res.data.status=='0'){
-      commit(GET_CHANNELNEWS,res)
+      commit(SET_CHANNELNEWS,res)
     }
     return res
   },
@@ -31,7 +32,7 @@ export default {
   }, params) {
     let res = await getChannels(params)
     if(res.data.status=='0'){
-      commit(GET_CHANNEL,res.data.result)
+      commit(SET_CHANNEL,res.data.result)
       commit(SET_CHNNELNAME,res.data.result[0])
       commit(SET_CHNNELINDEX,0)
     }
@@ -44,10 +45,18 @@ export default {
     let res = await searchNews(params)
     return res
   },
+  // 设置loading状态
   FetchLoading({
     commit
   }, params) {
     commit(FETCH_LOADING, params)
   },
+  // 新闻收藏
+  CollectNews({
+    commit,
+    state
+  },params){
+    commit(SET_COLLECTNEWS,params)
+  }
 
 }

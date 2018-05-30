@@ -33,7 +33,7 @@
 <style lang="css" scoped>
   .header {
     width: 100%;
-    height: 1.2rem;
+    height: 2rem;
     font-size: 20px;
     justify-content: space-between;
     display: flex;
@@ -43,10 +43,9 @@
     color: #fff;
     z-index: 99;
   }
-
   img {
-    width: .67rem;
-    height: .67rem;
+    width: 1rem;
+    height: 1rem;
     padding: .4rem;
   }
 

@@ -38,7 +38,7 @@
             })
           }
         }, err => {
-          onsole.log(response)
+          
         })
       },
       toDetailNews() {

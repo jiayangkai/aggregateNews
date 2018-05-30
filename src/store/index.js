@@ -15,6 +15,7 @@ const state = {
   channelIndex: 0,
   // 当前频道名称
   channelName: '',
+  channelNew: {},
   channelArr: [],
   channelNews: [],
   // 收藏的新闻

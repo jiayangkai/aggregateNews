@@ -1,19 +1,20 @@
 import {
-	GET_CHANNEL,
+	SET_CHANNEL,
 	FETCH_LOADING,
-	GET_CHANNELNEWS,
+	SET_CHANNELNEWS,
 	SET_CHNNELINDEX,
-	SET_CHNNELNAME
+  SET_CHNNELNAME,
+  SET_COLLECTNEWS
 } from './mutation_types.js'
 
 export default {
-    [GET_CHANNEL](state,data){
+    [SET_CHANNEL](state,data){
         state.channelarr = data
     },
     [FETCH_LOADING](state, data) {
 		state.fetchLoading = data;
     },
-    [GET_CHANNELNEWS](state, data) {
+    [SET_CHANNELNEWS](state, data) {
 		state.channelNews = data;
     },
     [SET_CHNNELINDEX](state, data) {
@@ -21,5 +22,8 @@ export default {
     },
     [SET_CHNNELNAME](state, data) {
 		state.channelName = data;
+    },
+    [SET_COLLECTNEWS](state, data) {
+		state.collectionNews.push(data);
     }
 }
