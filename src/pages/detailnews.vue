@@ -55,10 +55,10 @@
 }
 .header{
     width: 100%;
-    height: 1.33rem;
+    height: 2rem;
     background-color: #d43d3d;
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,12 +66,12 @@
     top: 0;
 }
 .header img{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     padding: 0;
 }
 .container{
-    padding-top: 1.33rem;
+    padding-top: 2rem;
     margin: 20px;
 }
 .news-title{
@@ -87,5 +87,12 @@
 .news-message span:last-child{
     margin-left: 10px;
 }
-
+.container img{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.nwes-content{
+  font-size: 18px;
+  line-height: 30px;
+}
 </style>

@@ -9,7 +9,7 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
   let title = 'aggregatenews';
-  if(to.meta.title !== ''){
+  if(to.meta.title){
     title = to.meta.title
   }
   document.title = title;

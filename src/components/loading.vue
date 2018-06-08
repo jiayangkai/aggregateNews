@@ -27,7 +27,7 @@
     
     <style lang="scss" scoped>
     .preloader-indicator-modal {
-      background: rgba(0, 0, 0, 0.1);
+      background: #fff;
       margin-left: toRem(-25px);
       margin-top: toRem(-50px);
     }

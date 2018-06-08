@@ -10,6 +10,7 @@ Vue.use(VueRouter)
 const home = r => require.ensure([], () => r(require('@/pages/home.vue')), 'home')
 const personal = r => require.ensure([], () => r(require('@/pages/personalinfo.vue')), 'personal')
 const detailnews = r => require.ensure([], () => r(require('@/pages/detailnews.vue')), 'detailnews')
+const search = r => require.ensure([], () => r(require('@/pages/search.vue')), 'search')
 
 const router = new VueRouter({
   mode: routerMode,
@@ -33,6 +34,11 @@ const router = new VueRouter({
         path: '/detailnews',
         name: 'detailnews',
         component: detailnews
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: search
       }
     ]
   }]

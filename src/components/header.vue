@@ -1,30 +1,30 @@
 <template lang="html">
   <div class="header">
-    <img class="personalImg" :src="profileSrc" @Click="getProfile">
+    <img class="personalImg" :src="profileSrc" @click="getProfile">
     <span>A News</span>
-    <img :src="searchSrc" @Click="search">
+    <img :src="searchSrc" @click="search">
   </div>
 </template>
 <script>
   export default {
     computed: {
-      profileSrc: function () {
+      profileSrc() {
         var src = require("../assets/header/profile.png")
         return src
       },
-      searchSrc: function () {
+      searchSrc() {
         var src = require("../assets/search/search.png")
         return src
       }
     },
     methods: {
       // 跳转到个人中心
-      getProfile: function () {
-
+      getProfile() {
+        this.$store.state.islogin = true
       },
       // 跳转到搜索页面
-      search: function () {
-
+      search() {
+        this.$router.push('/search')
       }
     }
   }
@@ -43,6 +43,7 @@
     color: #fff;
     z-index: 99;
   }
+
   img {
     width: 1rem;
     height: 1rem;

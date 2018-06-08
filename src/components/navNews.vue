@@ -13,7 +13,6 @@
     </div>
     <!-- 频道新闻 -->
     <div class="news-content">
-      <loading v-show="fetchLoading"></loading>
       <carousel v-show="this.$store.state.channelIndex === 0"></carousel>
       <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
         <div class="news">
@@ -35,7 +34,6 @@
 <script>
   // 引入组件
   import carousel from '@/components/carousel'
-  import loading from '@/components/loading'
   import {
     mapState,
     mapActions,
@@ -50,8 +48,7 @@
     },
     // 注册组件
     components: {
-      carousel,
-      loading
+      carousel
     },
     computed: {
       ...mapState(['fetchLoading']),
@@ -97,8 +94,8 @@
     },
     mounted() {
       this.getchannels(),
-        this.getNews(this.$store.state.channelName, 0)
-      this.FetchLoading(false)
+        this.getNews(this.$store.state.channelName, 0),
+        this.FetchLoading(false)
     },
     created() {
       this.FetchLoading(true)
@@ -117,7 +114,7 @@
     height: .96rem;
     background-color: #f4f5f6;
     display: flex;
-    position: fixed;
+    position: absolute;
     z-index: 99;
   }
 
@@ -165,7 +162,7 @@
     margin-top: 30px;
     width: 50px;
     height: 50px;
-    animation: loading .6s linear infinite
+    animation: loading .6s linear infinite;
   }
 
   .section {

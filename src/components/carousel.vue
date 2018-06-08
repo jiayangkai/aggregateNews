@@ -88,12 +88,12 @@
     transform: translateX(-100%);
     transition: all 1s ease;
   }
-  .image-enter {
+  /* .image-enter {
     transform: translateX(100%);
   }
   .image-leave {
     transform: translateX(0);
-  }
+  } */
   .bullet {
     width: 100%;
     position: absolute;

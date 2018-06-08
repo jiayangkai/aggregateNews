@@ -1,6 +1,8 @@
 <template lang="html">
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <loading v-show="fetchLoading"></loading>
   </div>
 </template>
@@ -10,30 +12,26 @@
     mapState,
     mapGetters,
     mapActions
-  } from "vuex"
-  import loading from "./components/loading"
+  } from "vuex";
+  import loading from "./components/loading.vue";
   export default {
-    data() {
-      return {}
-    },
     computed: {
       ...mapState(["fetchLoading"])
     },
     components: {
       loading
     },
-    created() {},
     methods: {
-      ...mapActions(["FetchLoading"])
-    },
-    beforeRouteEnter(to, from, next) {
-      next()
-    },
-    beforeRouteUpdate(to, from, next) {
-      next(vm => {})
-    },
-    afterRouteEnter(to, from, next) {
-      next(vm => {})
+      ...mapActions(["FetchLoading"]),
+      beforeRouteEnter(to, from, next) {
+        next()
+      },
+      beforeRouteUpdate(to, from, next) {
+        next(vm => {})
+      },
+      afterRouteEnter(to, from, next) {
+        next(vm => {})
+      }
     }
   }
 
@@ -44,6 +42,7 @@
   body {
     overflow-x: hidden;
   }
+
   body,
   div,
   dl,
