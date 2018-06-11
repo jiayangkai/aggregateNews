@@ -15,7 +15,7 @@
       <div class="section" v-for="(item, index) in result">
         <div class="news" @click="toDetail(item)">
           <div class="news-left">
-            <img :src="item.pic[0] || require('../assets/logo.png')">
+            <img :src="item.pic || require('../assets/logo.png')">
           </div>
           <div class="news-right">
             <div class="news-title">{{item.title}}</div>
@@ -60,7 +60,7 @@
       },
       searchNews(param) {
         let that = this
-        if (!params || params == '') {
+        if (!param || param == '') {
           return
         }
         // 清空原有结果
@@ -70,11 +70,13 @@
         that.searchnews(params).then(response => {
           if (response.data.status == '0') {
             that.result = response.data.result.list
+            that.FetchLoading(false)
           }
         }, (err) => {
           console.log(err)
+          that.FetchLoading(false)
         })
-        that.FetchLoading(false)
+        
       },
       toDetail(params) {
         this.$store.state.channelNew = params
@@ -95,7 +97,7 @@
   .header {
     width: 100%;
     height: 2rem;
-    background-color: #d43d3d;
+    background-color: coral;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -138,12 +140,12 @@
 
   .section {
     width: 100%;
-    height: 2.5rem;
+    height: 5rem;
     border-bottom: 1px solid #ccc;
   }
 
   .news {
-    height: 2.25rem;
+    height: 4.75rem;
     box-sizing: border-box;
     margin: 10px 10px;
     display: flex;
@@ -151,6 +153,7 @@
 
   .news-left {
     height: 100%;
+    width: 5rem;
   }
 
   .news-left img {
