@@ -2,8 +2,9 @@
   <div class="detail">
     <div class="header">
       <img :src="backImg" @click="goback">
-      <span>{{this.$store.state.channelName}}</span>
-      <img :src="collectImg" @click="collectNews">
+      <span>{{channelName}}</span>
+      <img v-show="showCollectionImg" :src="collectImg" @click="collectNews">
+      <span v-show="!showCollectionImg"></span>
     </div>
     <div class="container">
       <div class="news-title">{{channelNews && channelNews.title}}</div>
@@ -24,6 +25,7 @@
   } from 'vuex'
   export default {
     computed: {
+      ...mapState(["showCollectionImg","channelName"]),
       backImg() {
         return require('../assets/back.png')
       },

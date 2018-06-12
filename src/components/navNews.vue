@@ -13,7 +13,7 @@
     </div>
     <!-- 频道新闻 -->
     <div class="news-content">
-      <carousel v-show="this.$store.state.channelIndex === 0"></carousel>
+      <carousel v-show="channelIndex === 0"></carousel>
       <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
         <div class="news">
           <div class="news-left">
@@ -51,14 +51,14 @@
       carousel
     },
     computed: {
-      ...mapState(['fetchLoading']),
+      ...mapState(['fetchLoading', 'channelIndex']),
       addImg: function () {
         var src = require('../assets/add.png')
         return src
       }
     },
     methods: {
-      ...mapActions(['getchannel', 'getNewsByChannel', 'FetchLoading']),
+      ...mapActions(['getchannel', 'getNewsByChannel', 'FetchLoading', 'ShowCollectionImg']),
       getchannels() {
         this.getchannel().then(response => {
           if (response.data.status == '0') {
@@ -69,9 +69,10 @@
         })
       },
       managechannel() {
-
+        this.$router.push('/managechannel')
       },
       getNews(channel, index) {
+        this.FetchLoading(true)
         this.$store.state.channelName = channel
         this.$store.state.channelIndex = index
         let params = 'channel=' + this.$store.state.channelName +
@@ -79,9 +80,11 @@
         this.getNewsByChannel(params).then(response => {
           if (response.data.status == '0') {
             this.channelNews = response.data.result.list
+            this.FetchLoading(false)
           }
         }, (err) => {
           console.log(err)
+          this.FetchLoading(false)
         })
       },
       getdetailNews() {
@@ -89,18 +92,14 @@
       },
       todetailnews(item, index) {
         this.$store.state.channelNew = item
+        this.ShowCollectionImg(true)
         this.$router.push('/detailnews')
       }
     },
     mounted() {
       this.getchannels(),
-        this.getNews(this.$store.state.channelName, 0),
-        this.FetchLoading(false)
+        this.getNews(this.$store.state.channelName, 0)
     },
-    created() {
-      this.FetchLoading(true)
-    }
-
   }
 
 </script>
@@ -111,7 +110,7 @@
 
   .nav {
     width: 100%;
-    height: .96rem;
+    height: 1.5rem;
     background-color: #f4f5f6;
     display: flex;
     position: absolute;
@@ -125,7 +124,7 @@
     display: flex;
     align-items: center;
     overflow-x: scroll;
-    font-size: .45rem;
+    font-size: 1.2rem;
     color: #505050;
   }
 
@@ -150,19 +149,12 @@
   }
 
   .manage-channel img {
-    width: .53rem;
-    height: .53rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
-  .newsContent {
+  .news-content {
     padding-top: 0.96rem;
-  }
-
-  loading {
-    margin-top: 30px;
-    width: 50px;
-    height: 50px;
-    animation: loading .6s linear infinite;
   }
 
   .section {

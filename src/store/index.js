@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 const state = {
   fetchLoading: false,
-  firstPage: null,
+  showCollectionImg: true,
   user: {},
   // 
   islogin: false,
@@ -20,8 +20,6 @@ const state = {
   channelNews: [],
   // 收藏的新闻
   collectionNews: [],
-  // 当前可用频道
-  currentChannels: [],
   // 移除的频道
   deletedChannels: []
 }

@@ -9,32 +9,31 @@ import {
   SET_CHANNELNEWS,
   SET_CHNNELINDEX,
   SET_CHNNELNAME,
-  SET_COLLECTNEWS
+  SET_COLLECTNEWS,
+  SHOW_COLLECT_IMG
 } from './mutation_types.js'
 
 
 export default {
   // 获取频道新闻
   async getNewsByChannel({
-    commit,
-    state
+    commit
   }, params) {
     let res = await getNewsByChannel(params)
-    if(res.data.status=='0'){
-      commit(SET_CHANNELNEWS,res)
+    if (res.data.status == '0') {
+      commit(SET_CHANNELNEWS, res)
     }
     return res
   },
   // 获取频道数组
   async getchannel({
-    commit,
-    state
+    commit
   }, params) {
     let res = await getChannels(params)
-    if(res.data.status=='0'){
-      commit(SET_CHANNEL,res.data.result)
-      commit(SET_CHNNELNAME,res.data.result[0])
-      commit(SET_CHNNELINDEX,0)
+    if (res.data.status == '0') {
+      commit(SET_CHANNEL, res.data.result)
+      commit(SET_CHNNELNAME, res.data.result[0])
+      commit(SET_CHNNELINDEX, 0)
     }
     return res
   },
@@ -53,10 +52,15 @@ export default {
   },
   // 新闻收藏
   CollectNews({
-    commit,
-    state
-  },params){
-    commit(SET_COLLECTNEWS,params)
+    commit
+  }, params) {
+    commit(SET_COLLECTNEWS, params)
+  },
+  // 设置收藏按钮状态
+  ShowCollectionImg({
+    commit
+  }, params) {
+    commit(SHOW_COLLECT_IMG, params)
   }
 
 }

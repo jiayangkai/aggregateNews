@@ -11,6 +11,7 @@ const home = r => require.ensure([], () => r(require('@/pages/home.vue')), 'home
 const personal = r => require.ensure([], () => r(require('@/pages/personalinfo.vue')), 'personal')
 const detailnews = r => require.ensure([], () => r(require('@/pages/detailnews.vue')), 'detailnews')
 const search = r => require.ensure([], () => r(require('@/pages/search.vue')), 'search')
+const managechannel = r => require.ensure([], () => r(require('@/pages/channelmanage.vue')), 'managechannel')
 
 const router = new VueRouter({
   mode: routerMode,
@@ -39,6 +40,9 @@ const router = new VueRouter({
         path: '/search',
         name: 'search',
         component: search
+      },{
+        path:'/managechannel',
+        component:managechannel
       }
     ]
   }]

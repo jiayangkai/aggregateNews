@@ -54,7 +54,7 @@
       }
     },
     methods: {
-      ...mapActions(["FetchLoading", "searchnews"]),
+      ...mapActions(["FetchLoading", "searchnews","ShowCollectionImg"]),
       backHome() {
         this.$router.back(-1)
       },
@@ -80,6 +80,7 @@
       },
       toDetail(params) {
         this.$store.state.channelNew = params
+        this.ShowCollectionImg(false)
         this.$router.push('/detailnews')
       }
     }

@@ -22,7 +22,6 @@
       loading
     },
     methods: {
-      ...mapActions(["FetchLoading"]),
       beforeRouteEnter(to, from, next) {
         next()
       },
