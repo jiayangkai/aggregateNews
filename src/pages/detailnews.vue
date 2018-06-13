@@ -3,7 +3,7 @@
     <div class="header">
       <img :src="backImg" @click="goback">
       <span>{{channelName}}</span>
-      <img v-show="showCollectionImg" :src="collectImg" @click="collectNews">
+      <img v-show="showCollectionImg" :src="collectImg" @click="collectDetailNews">
       <span v-show="!showCollectionImg"></span>
     </div>
     <div class="container">
@@ -40,12 +40,13 @@
         }
     },
     methods: {
-      ...mapMutations(['CollectNews']),
+      ...mapActions(['CollectNews']),
       goback() {
         this.$router.back(1)
       },
-      collectNews() {
-        this.collectNews(this.channelNews)
+      collectDetailNews() {
+        console.log(this.channelNews)
+        this.CollectNews(this.channelNews)
       }
     }
   }
@@ -58,7 +59,7 @@
 .header{
     width: 100%;
     height: 2rem;
-    background-color: #d43d3d;
+    background-color: coral;
     color: #fff;
     font-size: 20px;
     display: flex;

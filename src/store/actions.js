@@ -21,7 +21,7 @@ export default {
   }, params) {
     let res = await getNewsByChannel(params)
     if (res.data.status == '0') {
-      commit(SET_CHANNELNEWS, res)
+      commit(SET_CHANNELNEWS, res.data.result.list)
     }
     return res
   },
