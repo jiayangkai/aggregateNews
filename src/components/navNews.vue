@@ -12,9 +12,11 @@
       </div>
     </div>
     <!-- 频道新闻 -->
+    
     <div class="news-content">
       <carousel v-show="channelIndex === 0"></carousel>
-      <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
+      <slide :dataList="channelNews" :eventType="1"></slide>
+      <!-- <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
         <div class="news">
           <div class="news-left">
             <img :src="item.pic || require('../assets/logo.png')">
@@ -27,13 +29,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
   // 引入组件
   import carousel from '@/components/carousel'
+  import slide from '@/components/slide'
   import {
     mapState,
     mapActions,
@@ -48,7 +51,8 @@
     },
     // 注册组件
     components: {
-      carousel
+      carousel,
+      slide
     },
     computed: {
       ...mapState(['fetchLoading', 'channelIndex']),
@@ -97,7 +101,7 @@
       }
     },
     mounted() {
-      this.getchannels(),
+        this.getchannels(),
         this.getNews(this.$store.state.channelName, 0)
     },
   }

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="container">
-    <div class="section" v-for="(item,index) in channelNews" data-type="0" :key="index" @touchstart.capture="touchStart" @touchend.capture="touchEnd"
+    <div class="section" v-for="(item,index) in newsList" data-type="0" :key="index" @touchstart.capture="touchStart" @touchend.capture="touchEnd"
       @click="todetailnews(item,index)">
       <div class="news">
         <div class="news-left">
@@ -14,14 +14,14 @@
           </div>
         </div>
       </div>
-      <div class="delete" @click="deleteItem" :data-index="index">删除</div>
+      <div class="event-section" @click="clickEvent" :data-index="index">{{eventName}}</div>
     </div>
   </div>
 </template>
 <script>
   import {
     mapState,
-    mapAcitons,
+    mapActions,
     mapMutations
   } from 'vuex'
   export default {
@@ -31,14 +31,33 @@
         endX: 0
       }
     },
+    props: {
+      // 0:删除;1:收藏;2:取消收藏
+      eventType: Number,
+      dataList: Array
+    },
     computed: {
-      ...mapState(['channelNews']),
       logoImg() {
         let src = require('../assets/logo.png')
         return src
+      },
+      eventName() {
+        if (this.eventType == 0) {
+          return '删除'
+        }
+        if (this.eventType == 1) {
+          return '收藏'
+        }
+        if (this.eventType == 2) {
+          return '取消收藏'
+        }
+      },
+      newsList() {
+        return this.dataList.slice()
       }
     },
     methods: {
+      ...mapActions(['CollectNews']),
       // 判断当前是否有处于滑动状态的滑块
       checkSlide() {
         let itemList = document.querySelectorAll('.section')
@@ -95,13 +114,26 @@
         that.startX = 0
         that.endX = 0
       },
-      deleteItem(e) {
+      clickEvent(e) {
         let that = this
         // 阻止点击事件冒泡，不触发父级元素点击事件
         event.stopPropagation();
-        let index = e.currentTarget.dataset.index
         that.resetSlide()
-        that.channelNews.splice(index, 1)
+        let index = e.currentTarget.dataset.index
+        if (that.eventType == 0) {
+          that.$store.state.collectionNews.splice(index, 1)
+          return
+        }
+        let item = that.newsList[index]
+        if (that.eventType == 1) {
+          that.CollectNews(item)
+          return
+        }
+        if (that.eventType == 2) {
+          let index = that.$store.state.collectionNews.indexOf(item)
+          that.$store.state.collectionNews.splice(index, 1)
+          return
+        }
       }
     }
 
@@ -109,14 +141,9 @@
 
 </script>
 <style scoped>
-  .container {
-    padding-top: 3rem;
-  }
-
   .section {
     width: 100%;
     height: 5rem;
-    border-bottom: 1px solid #ccc;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
     position: relative;
@@ -151,6 +178,7 @@
     margin: 10px 10px;
     display: flex;
     position: absolute;
+    padding: 0.2rem;
   }
 
   .news-left {
@@ -185,16 +213,19 @@
     justify-content: space-between;
   }
 
-  .delete {
+  .event-section {
     width: 4rem;
     height: 100%;
     background-color: #ff4949;
     font-size: 25px;
     color: #fff;
     text-align: center;
-    line-height: 100%;
+    /* line-height: 4.5rem; */
     position: absolute;
     right: -4rem;
+    /* 以下三行实现文本居中，css3新特性 */
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
 

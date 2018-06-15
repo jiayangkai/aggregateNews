@@ -5,8 +5,8 @@
       <span>我的收藏</span>
       <span></span>
     </div>
-    <slide class="slide"></slide>
-    <div class="content">
+    <slide class="slide" :dataList="collectionNews" :eventType="0"></slide>
+    <!-- <div class="content">
       <div class="new-container" v-for="(item,index) in collectionNews" :key="index">
         <div class="section" @click="toDetailNews(item,index)">
           <div class="news-left">
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>

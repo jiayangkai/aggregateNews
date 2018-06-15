@@ -45,7 +45,6 @@
         this.$router.back(1)
       },
       collectDetailNews() {
-        console.log(this.channelNews)
         this.CollectNews(this.channelNews)
       }
     }
