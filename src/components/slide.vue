@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="container">
-    <div class="section" v-for="(item,index) in newsList" data-type="0" :key="index" @touchstart.capture="touchStart" @touchend.capture="touchEnd"
-      @click="todetailnews(item,index)">
+    <div class="section" v-for="(item,index) in newsList" data-type="0" :key="index" :data-index="index" @touchstart.capture="touchStart"
+      @touchend.capture="touchEnd" @click="todetailnews(item,index)">
       <div class="news">
         <div class="news-left">
           <img :src="item.pic || logoImg">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="event-section" @click="clickEvent" :data-index="index">{{eventName}}</div>
+      <div class="event-section" @click="clickEvent" :data-index="index">{{item.eventName}}</div>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@
     mapActions,
     mapMutations
   } from 'vuex'
+  import tools from '../common/tools'
   export default {
     data() {
       return {
@@ -32,25 +33,14 @@
       }
     },
     props: {
-      // 0:删除;1:收藏;2:取消收藏
-      eventType: Number,
+      // 0:收藏;1:主页;
+      dataType: Number,
       dataList: Array
     },
     computed: {
       logoImg() {
         let src = require('../assets/logo.png')
         return src
-      },
-      eventName() {
-        if (this.eventType == 0) {
-          return '删除'
-        }
-        if (this.eventType == 1) {
-          return '收藏'
-        }
-        if (this.eventType == 2) {
-          return '取消收藏'
-        }
       },
       newsList() {
         return this.dataList.slice()
@@ -120,18 +110,21 @@
         event.stopPropagation();
         that.resetSlide()
         let index = e.currentTarget.dataset.index
-        if (that.eventType == 0) {
+        let item = tools.deepClone(that.newsList[index])
+        if (item.eventName == '删除') {
           that.$store.state.collectionNews.splice(index, 1)
           return
         }
-        let item = that.newsList[index]
-        if (that.eventType == 1) {
+        if (item.eventName == '收藏') {
+          item.eventName = '删除'
           that.CollectNews(item)
+          that.dataList[index].eventName = '取消'
           return
         }
-        if (that.eventType == 2) {
-          let index = that.$store.state.collectionNews.indexOf(item)
-          that.$store.state.collectionNews.splice(index, 1)
+        if (item.eventName == '取消') {
+          that.dataList[index].eventName = '收藏'
+          let cindex = that.$store.state.collectionNews.indexOf(item)
+          that.$store.state.collectionNews.splice(cindex, 1)
           return
         }
       }

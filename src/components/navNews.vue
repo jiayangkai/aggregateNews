@@ -12,10 +12,10 @@
       </div>
     </div>
     <!-- 频道新闻 -->
-    
+
     <div class="news-content">
       <carousel v-show="channelIndex === 0"></carousel>
-      <slide :dataList="channelNews" :eventType="1"></slide>
+      <slide :dataList="channelNews" :dataType="1"></slide>
       <!-- <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
         <div class="news">
           <div class="news-left">
@@ -35,6 +35,7 @@
 </template>
 <script>
   // 引入组件
+  import Vue from 'vue'
   import carousel from '@/components/carousel'
   import slide from '@/components/slide'
   import {
@@ -84,6 +85,9 @@
         this.getNewsByChannel(params).then(response => {
           if (response.data.status == '0') {
             this.channelNews = response.data.result.list
+            this.channelNews.forEach((x) => {
+              Vue.set(x,'eventName','收藏')
+            })
             this.FetchLoading(false)
           }
         }, (err) => {
@@ -101,7 +105,7 @@
       }
     },
     mounted() {
-        this.getchannels(),
+      this.getchannels(),
         this.getNews(this.$store.state.channelName, 0)
     },
   }
