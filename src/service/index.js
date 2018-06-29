@@ -7,7 +7,7 @@ export const getNewsByChannel = (params) => fetch({
 })
 // 获取频道
 export const getChannels = () => fetch({
-  'url': 'api/news/channel?appkey=32156feecb44b2ec',
+  'url': 'http://192.168.55.45:9009/api/news/getChannels',
   'method': 'post',
 })
 // 搜索新闻
