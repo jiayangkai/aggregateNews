@@ -8,24 +8,39 @@
     <div class="content">
       <div class="delete-channel">
         <div class="title delete-title">
-          点击删除频道
+          已启用频道(拖动排序/禁用频道)
         </div>
-        <ul>
+        <!-- <ul>
           <li v-for="(item,index) in channelArr" :key="index" class="channel-name" :class="{'channel-name-index':item === '头条'}" @click="deleteChannel(item,index)">{{item}}</li>
-        </ul>
+        </ul> -->
+        <div class="channel-min">
+          <draggable v-model="channelList" :options="{group:'name'}" @add="updateChannel" @end="updateChannel">
+            <transition-group class="channel-manage" tag="ul">
+              <li class="channel-name" :class="{'channel-name-index':item.name === '头条'}" v-for="(item,index) in channelList" :key="index">{{item.name}}</li>
+            </transition-group>
+          </draggable>
+        </div>
       </div>
       <div class="add-channel">
         <div class="title add-title">
-          点击添加频道
+          禁用频道
         </div>
-        <ul>
+        <!-- <ul>
           <li v-for="(item,index) in deletedChannels" class="channel-name" @click="addChannel(item,index)">{{item}}</li>
-        </ul>
+        </ul> -->
+        <div class="channel-min">
+          <draggable v-model="deletedList" :options="{group:'name'}">
+            <transition-group class="channel-manage" tag="ul">
+              <li class="channel-name" v-for="(item,index) in deletedList" :key="index">{{item.name}}</li>
+            </transition-group>
+          </draggable>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import draggable from 'vuedraggable'
   import {
     mapState,
     mapActions,
@@ -34,8 +49,12 @@
   export default {
     data() {
       return {
-
+        channelList: [],
+        deletedList: []
       }
+    },
+    components: {
+      draggable
     },
     computed: {
       ...mapState(['channelArr', 'deletedChannels']),
@@ -45,6 +64,9 @@
       }
     },
     methods: {
+      updateChannel(){
+        this.$store.state.channelArr = this.channelList.slice()
+      },
       deleteChannel(item, index) {
         this.channelArr.splice(index, 1)
         this.deletedChannels.push(item)
@@ -55,7 +77,13 @@
       },
       backHome() {
         this.$router.back(-1)
+      },
+      setChannelData() {
+        this.channelList = this.channelArr.slice()
       }
+    },
+    mounted() {
+      this.setChannelData()
     }
   }
 
@@ -108,14 +136,28 @@
     display: inline-block;
   }
 
+  .channel-manage {
+    width: 100%;
+    /* display: flex; */
+    min-height: 2rem;
+  }
+
+  .channel-min {
+    min-height: 2rem;
+  }
+
   .channel-name {
     width: 2.5rem;
     height: 1.5rem;
     border: 1px solid #ccc;
     margin: .13rem .27rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
     text-align: center;
     line-height: 1.5rem;
     font-size: 16px;
+    /* float: left; */
   }
 
   .channel-name-index {

@@ -4,7 +4,7 @@
     <div class="nav">
       <div class="channel">
         <ul>
-          <li v-for="(channel,index) in channelarr" :key="index" @click="getNews(channel,index)">{{channel}}</li>
+          <li v-for="(channel,index) in this.$store.state.channelArr" :key="index" @click="getNews(channel.name,index)">{{channel.name}}</li>
         </ul>
       </div>
       <div class="manage-channel">
@@ -16,6 +16,8 @@
     <div class="news-content">
       <carousel v-show="channelIndex === 0"></carousel>
       <slide :dataList="channelNews" :dataType="1"></slide>
+      <div v-if='channelNews.length > 0' class="news-more" @click='getMoreNews'>加载更多</div>
+      <div v-if='isMore()' class="news-more news-none">没有更多了</div>
       <!-- <div class="section" v-for="(item,index) in channelNews" :key="index" @click="todetailnews(item,index)">
         <div class="news">
           <div class="news-left">
@@ -46,8 +48,9 @@
   export default {
     data() {
       return {
-        channelarr: [],
-        channelNews: []
+        channelList: [],
+        channelNews: [],
+        currentPage: 1,
       }
     },
     // 注册组件
@@ -67,7 +70,9 @@
       getchannels() {
         this.getchannel().then(response => {
           if (response.data.status == '0') {
-            this.channelarr = response.data.result
+            this.$store.state.channelArr = response.data.result.map((name) => {
+              return {name}
+            })
           }
         }, (err) => {
           console.log(err)
@@ -81,12 +86,12 @@
         this.$store.state.channelName = channel
         this.$store.state.channelIndex = index
         let params = 'channel=' + this.$store.state.channelName +
-          '&start=0&num=10'
+          '&start=&num=' + this.currentPage * 10
         this.getNewsByChannel(params).then(response => {
           if (response.data.status == '0') {
             this.channelNews = response.data.result.list
             this.channelNews.forEach((x) => {
-              Vue.set(x,'eventName','收藏')
+              Vue.set(x, 'eventName', '收藏')
             })
             this.FetchLoading(false)
           }
@@ -102,6 +107,27 @@
         this.$store.state.channelNew = item
         this.ShowCollectionImg(true)
         this.$router.push('/detailnews')
+      },
+      getMoreNews() {
+        this.currentPage++
+          this.FetchLoading(true)
+        let params = 'channel=' + this.$store.state.channelName +
+          '&start=&num=' + this.currentPage * 10
+        this.getNewsByChannel(params).then(response => {
+          if (response.data.status == '0') {
+            this.channelNews = response.data.result.list
+            this.channelNews.forEach((x) => {
+              Vue.set(x, 'eventName', '收藏')
+            })
+            this.FetchLoading(false)
+          }
+        }, (err) => {
+          console.log(err)
+          this.FetchLoading(false)
+        })
+      },
+      isMore() {
+        return this.channelNews.length < this.currentPage * 10
       }
     },
     mounted() {
@@ -209,6 +235,17 @@
     align-items: flex-end;
     color: #888;
     justify-content: space-between;
+  }
+
+  .news-more {
+    /* 以下三行实现文本居中，css3新特性 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .news-none {
+    color: #ccc;
   }
 
 </style>

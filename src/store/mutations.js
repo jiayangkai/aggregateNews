@@ -10,7 +10,7 @@ import {
 
 export default {
   [SET_CHANNEL](state, data) {
-    state.channelArr = data
+    state.channelArr = data.map((name)=>{return{name}})
   },
   [FETCH_LOADING](state, data) {
     state.fetchLoading = data
