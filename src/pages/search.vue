@@ -87,7 +87,7 @@
   }
 
 </script>
-<style lang="css">
+<style lang="css" scoped>
   .search-header {
     position: fixed;
     top: 0;

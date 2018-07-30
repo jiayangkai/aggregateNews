@@ -14,7 +14,7 @@
     <!-- 频道新闻 -->
 
     <div class="news-content">
-      <carousel v-show="channelIndex === 0"></carousel>
+      <carousel class="news-carcousel" v-show="channelIndex === 0"></carousel>
       <slide :dataList="channelNews" :dataType="1"></slide>
       <div v-if='channelNews.length > 0' class="news-more" @click='getMoreNews'>加载更多</div>
       <div v-if='isMore()' class="news-more news-none">没有更多了</div>
@@ -146,8 +146,9 @@
     width: 100%;
     height: 1.5rem;
     background-color: #f4f5f6;
+    box-shadow: 0 0 1px rgba(20, 20, 20,0.6);
     display: flex;
-    position: absolute;
+    position: fixed;
     z-index: 99;
   }
 
@@ -160,10 +161,6 @@
     overflow-x: scroll;
     font-size: 1.2rem;
     color: #505050;
-  }
-
-  .channel::-webkit-scrollbar {
-    height: 0;
   }
 
   .channel ul li {
@@ -185,6 +182,10 @@
   .manage-channel img {
     width: 1.2rem;
     height: 1.2rem;
+  }
+
+  .news-carcousel{
+    padding-top: 0.7rem;
   }
 
   .news-content {

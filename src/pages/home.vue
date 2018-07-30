@@ -28,7 +28,7 @@
 
 <style lang="css" scoped>
   .p-header {
-    position: absolute;
+    position: fixed;
     top: 0;
   }
 </style>

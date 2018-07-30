@@ -39,7 +39,7 @@
     display: flex;
     align-items: center;
     font-weight: 700;
-    background-color: coral;
+    background-color: rgba(245, 73, 10, 0.6);
     color: #fff;
     z-index: 99;
   }
